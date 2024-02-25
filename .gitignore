@@ -1,0 +1,9 @@
+.ollama
+.lighting_studio
+__pycache__
+
+/.ollama
+/.lighting_studio
+/__pycache__
+
+/.lighting_studio/
