@@ -3,6 +3,11 @@ import requests
 import json
 
 def send_chat_request(user_input):
+    # 我们故意抛出一个异常来测试异常处理
+    if user_input == "error":
+        raise ValueError("Intentional error to test exception handling.")
+    # 如果没有异常，返回一个正常的回答
+
     # 定义请求的 URL
     url = 'http://localhost:11434/api/chat'
     

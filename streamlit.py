@@ -12,11 +12,11 @@ from llm import send_chat_request
 #     "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
 #     "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
 
-st.title("💬 Chatbot")
-st.caption("🚀 Mario World!")
+st.title("🍄 Mario World")
+st.caption("🚀🍁❤️ Let's start adventure!")
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "Hi! I'm Mario. How can I help you?"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! I'm Mario. How can I help you?"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
@@ -27,7 +27,9 @@ if prompt := st.chat_input():
     #     st.stop()
 
     # client = OpenAI(api_key=openai_api_key)
+    # message记录到session里
     st.session_state.messages.append({"role": "user", "content": prompt})
+    # 显示到UI对话框
     st.chat_message("user").write(prompt)
     
     # if st.session_state.messages[-1]["role"] != "assistant":
@@ -35,6 +37,12 @@ if prompt := st.chat_input():
     # response = client.chat.completions.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
     # msg = response.choices[0].message.content
     # st.info(prompt)
-    msg = send_chat_request(prompt)
-    st.session_state.messages.append({"role": "assistant", "content": msg})
-    st.chat_message("assistant").write(msg)
+    try:
+        msg = send_chat_request(prompt)
+        st.session_state.messages.append({"role": "assistant", "content": msg})
+        st.chat_message("assistant").write(msg)
+    except ConnectionError as e:
+        # 这里可以添加日志记录或其他异常处理代码
+        st.session_state.messages.append({"role": "assistant", 
+            "content": "I'm sorry, I'm unable to connect to the server."})
+        st.chat_message("assistant").write("I'm sorry, I'm unable to connect to the server.")
