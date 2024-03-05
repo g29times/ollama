@@ -1,3 +1,4 @@
+# https://github.com/ollama/ollama/blob/main/docs/api.md
 print('Hello, Mario World!')
 
 # curl http://localhost:11434/api/chat -d '{

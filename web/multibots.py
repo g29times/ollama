@@ -1,5 +1,7 @@
+# https://kimi.moonshot.cn/chat/cncmjtg3r0738pmi74rg
 import streamlit as st
 from llm import send_chat_request
+import traceback
 
 # 助手基类
 class Assistant:
@@ -12,8 +14,9 @@ class Assistant:
         # 这里可以是一些逻辑来生成响应
         try:
             # 尝试调用外联方法send_chat_request
-            return send_chat_request(prompt)
+            return send_chat_request(self.name, prompt)
         except Exception as e:
+            traceback.print_exc()
             self._exception_occurred = True  # 标记异常发生
             # 如果发生异常，返回默认语句
             return f"{sub} An error occurred :("
@@ -22,12 +25,12 @@ class Assistant:
 # 马里奥助手
 class MarioAssistant(Assistant):
     def __init__(self):
-        super().__init__("Mario")
+        super().__init__("mario")
 
     def respond(self, sub, prompt):
         # 马里奥特有的响应逻辑
         # return f"{self.name} says: Let's go to the Mushroom Kingdom!"
-        return super().respond("Hi! I'm Mario. ", prompt)
+        return super().respond(f"{self.name} says: ", prompt)
 
         # # 马里奥特有的开头
         # marioe_say = "Hi! I'm Mario. "
@@ -40,28 +43,40 @@ class MarioAssistant(Assistant):
         # return f"{marioe_say}{response}"
 
 # 变形金刚助手
-class TransformerAssistant(Assistant):
+class MJAssistant(Assistant):
     def __init__(self):
-        super().__init__("Transformer")
+        super().__init__("mj")
 
     def respond(self, sub, prompt):
         # 变形金刚特有的响应逻辑
         # return f"{self.name} says: Autobots, roll out!"
-        return super().respond(f"{self.name} says: Autobots, roll out!", prompt)
+        return super().respond(f"{self.name} says: Hi, I'm QQ, I can do prompt refine!", prompt)
 
 # 助手工厂
 def get_assistant(name):
-    if name == "Mario":
+    if name == "mario":
+        # if "messages" not in st.session_state:
+        #     st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! I'm Mario. How can I help you?"}]
+        # # 显示聊天记录
+        # messages = st.session_state.get("messages", [])
+        # for msg in messages:
+        #     st.chat_message(msg["role"]).write(msg["content"])
         return MarioAssistant()
-    elif name == "Transformer":
-        return TransformerAssistant()
+    elif name == "mj":
+        # if "messages" not in st.session_state:
+        #     st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! I'm QQ. How can I help you?"}]
+        # # 显示聊天记录
+        # messages = st.session_state.get("messages", [])
+        # for msg in messages:
+        #     st.chat_message(msg["role"]).write(msg["content"])
+        return MJAssistant()
     else:
         return None
 
 # 主程序
 def main():
-    st.title("💬 Chatbot")
-    st.caption("🚀 Choose your assistant!")
+    st.title("🍄 Hello Chatbot")
+    st.caption("🚀 Choose your assistant! ❤️")
 
     # 鉴权 https://www.myaiexp.com/blog/ai/duo-mo-tai-yu-yan-mo
     st.write("Welcome to the World! You can proceed by providing your API Key")
@@ -82,15 +97,14 @@ def main():
         st.stop()
 
     # 选择多个助手 https://kimi.moonshot.cn/chat/cne2r26cp7ff5ft3lhdg
-    selected_assistant_name = st.selectbox("Select your assistant", ["Mario", "Transformer"])
+    selected_assistant_name = st.selectbox("Select your assistant", ["mario", "mj"])
     if selected_assistant_name:
         assistant = get_assistant(selected_assistant_name)
         if assistant:
             st.session_state["assistant"] = assistant
 
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! I'm " 
-            + selected_assistant_name + ". How can I help you?"}]
+        st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! How can I help you?"}]
 
     # 显示聊天记录
     messages = st.session_state.get("messages", [])

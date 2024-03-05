@@ -12,11 +12,11 @@ from llm import send_chat_request
 #     "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
 #     "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
 
-st.title("🍄 Mario World")
-st.caption("🚀🍁❤️ Let's start adventure!")
+st.title("🍄 Hello World 🍁")
+st.caption("🚀❤️ Let's start adventure!")
 
 if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! I'm Mario. How can I help you?"}]
+    st.session_state["messages"] = [{"role": "assistant", "content": "💬 Hi! How can I help you?"}]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
@@ -38,7 +38,7 @@ if prompt := st.chat_input():
     # msg = response.choices[0].message.content
     # st.info(prompt)
     try:
-        msg = send_chat_request(prompt)
+        msg = send_chat_request('mj', prompt)
         st.session_state.messages.append({"role": "assistant", "content": msg})
         st.chat_message("assistant").write(msg)
     except ConnectionError as e:
@@ -46,3 +46,5 @@ if prompt := st.chat_input():
         st.session_state.messages.append({"role": "assistant", 
             "content": "I'm sorry, I'm unable to connect to the server."})
         st.chat_message("assistant").write("I'm sorry, I'm unable to connect to the server.")
+    except Exception as e:
+            traceback.print_exc()

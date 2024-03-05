@@ -18,20 +18,21 @@ https://github.com/ollama/ollama/blob/main/docs/api.md
 # Commands
 ## help
 /?
+## 服务启动脚本
+bash /teamspace/studios/this_studio/ollama-start.sh
 ## set & use
 ### 第一步 安装、更新环境
-`
 curl -fsSL https://ollama.com/install.sh | sh
-`
-### 第二步 启动服务
+### 2 启动服务
 ollama serve
-### 第三步 运行模型 download & run model
+### 3 （新开terminal）第一次使用：下载并运行模型；之前已配置过：跳转到5
 ollama run mario | ollama run [model]
-### 创建定制模型
+### 4 创建及刷新 定制模型 建议每次使用
 ollama create mario -f ./Modelfile
-### 模型列表
-ollama list
-
+### 5 模型列表
+ollama list | ollama rm [model]
+### 6 测试启动 Streamlit 测试端口冲突等
+streamlit run --server.port 8501 streamlit.py
 
 # Tests
 ## 如何测试

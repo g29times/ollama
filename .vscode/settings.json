@@ -1,39 +1,5 @@
 {
   "python.defaultInterpreterPath": "/home/zeus/miniconda3/envs/cloudspace/bin/python",
-  "jupyter.kernels.filter": [
-    {
-        "path": "/commands/python3",
-        "type": "pythonEnvironment"
-    },
-    {
-        "path": "/commands/python",
-        "type": "pythonEnvironment"
-    },
-    {
-        "path": "/bin/python3.10",
-        "type": "pythonEnvironment"
-    },
-    {
-        "path": "/usr/bin/python3.10",
-        "type": "pythonEnvironment"
-    },
-    {
-        "path": "/bin/python3",
-        "type": "pythonEnvironment"
-    },
-    {
-        "path": "/usr/bin/python3",
-        "type": "pythonEnvironment"
-    },
-    {
-      "path": "/bin/python3.8",
-      "type": "pythonEnvironment"
-    },
-    {
-      "path": "/usr/bin/python3.8",
-      "type": "pythonEnvironment"
-    }
-  ],
   "workbench.startupEditor": "none",
   "python.terminal.activateEnvironment": false,
   "terminal.integrated.drawBoldTextInBrightColors": false,
@@ -95,5 +61,15 @@
   },
   "files.associations": {
     "*.studiorc": "shellscript"
-  }
+  },
+  "jupyter.kernels.excludePythonEnvironments": [
+    "/commands/python3",
+    "/commands/python",
+    "/bin/python3.10",
+    "/usr/bin/python3.10",
+    "/bin/python3",
+    "/usr/bin/python3",
+    "/bin/python3.8",
+    "/usr/bin/python3.8"
+  ]
 }

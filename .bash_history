@@ -1,0 +1,3 @@
+start.sh
+quit
+exit
