@@ -71,3 +71,44 @@ streamlit run --server.port 8501 streamlit.py
 - [用Streamlit+LLM](https://blog.csdn.net/weixin_42608414/article/details/128916767)
 - [LLM大语言模型（五）：用streamlit开发](https://blog.csdn.net/hugo_lei/article/details/135901123)
 - [多模态语言模型：探索 Gemini Pro 和 Streamlit 的神奇组合](https://www.myaiexp.com/blog/ai/duo-mo-tai-yu-yan-mo)
+
+
+# WEBUI
+## docs
+https://github.com/open-webui/open-webui#troubleshooting
+https://docs.openwebui.com/getting-started/#installing-docker
+https://openwebui.com/
+
+## install
+### docker
+sudo apt-get install ca-certificates curl
+
+sudo install -m 0755 -d ./etc/apt/keyrings
+
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o ./etc/apt/keyrings/docker.asc
+sudo chmod a+r ./etc/apt/keyrings/docker.asc
+
+sudo mkdir -p ./etc/apt/sources.list.d/
+sudo touch ./etc/apt/sources.list.d/docker.list
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=./etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee ./etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+检查 docker
+sudo docker run hello-world
+正常返回：Hello from Docker!
+
+### ollama
+检查 ollama
+curl http://127.0.0.1:11434/
+正常返回：Ollama is running
+
+启动 webui 端口8080
+docker run -d --name ollama-webui --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --restart always ghcr.io/open-webui/open-webui:main
+
+curl http://localhost:8080
