@@ -38,7 +38,7 @@ if prompt := st.chat_input():
     # msg = response.choices[0].message.content
     # st.info(prompt)
     try:
-        msg = send_chat_request('mj', prompt)
+        msg = send_chat_request('command-r', prompt)
         st.session_state.messages.append({"role": "assistant", "content": msg})
         st.chat_message("assistant").write(msg)
     except ConnectionError as e:

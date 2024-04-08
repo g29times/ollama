@@ -33,7 +33,7 @@ user_input = input("Please enter the content for the message: ")
 
 # 定义请求的数据
 data = {
-  "model": "mario",
+  "model": "mario-mistral",
   "messages": [
     { "role": "user", "content": user_input }
   ],
@@ -48,7 +48,7 @@ response = requests.post(url, data=json_data, headers={'Content-Type': 'applicat
 
 # 输出响应内容
 response_json = response.text
-# print(response_json)
+print(response_json)
 
 # 解析 JSON 数据
 data = json.loads(response_json)

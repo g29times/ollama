@@ -15,16 +15,19 @@ def send_chat_request(model, user_input):
 
     # 定义请求的数据
     data = {
-    "model": model,
-    "messages": [
-        { "role": "user", "content": user_input }
-        # , { "role": "system", "content": "" }
-    ],
-    "stream": False
+        "model": model,
+        "messages": [
+            { "role": "user", "content": user_input }
+            # , { "role": "system", "content": "" }
+        ],
+        "stream": False
     }
 
     # 将数据转换为 JSON 格式
     json_data = json.dumps(data)
+    
+    print(json_data)
+    print(url)
 
     # 发送 POST 请求
     response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json'})
@@ -40,7 +43,7 @@ def send_chat_request(model, user_input):
     assistant_content = data['message']['content']
 
     # 打印 "content" 内容
-    print("ORIGIN RESPONSE ---> " + assistant_content)
+    # print("ORIGIN RESPONSE ---> " + assistant_content)
 
     if model != "mario":
         return assistant_content
@@ -53,12 +56,12 @@ def send_chat_request(model, user_input):
 
         # 使用yi翻译为中文 定义请求的数据
         data = {
-        "model": "yi",
-        "messages": [
-            { "role": "system", "content": "你是一个翻译机器人，将输入的内容翻译为中文输出，一些罕见的人名和特殊名词可以不做翻译，保留原文" },
-            { "role": "user", "content": replaced_string }
-        ],
-        "stream": False
+            "model": "yi",
+            "messages": [
+                { "role": "system", "content": "你是一个翻译机器人，将输入的内容翻译为中文输出，一些罕见的人名和特殊名词可以不做翻译，保留原文" },
+                { "role": "user", "content": replaced_string }
+            ],
+            "stream": False
         }
 
         # 将数据转换为 JSON 格式
