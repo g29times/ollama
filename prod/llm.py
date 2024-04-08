@@ -1,4 +1,4 @@
-# 自定义LLM主程序 https://github.com/ollama/ollama/blob/main/docs/api.md
+# LLM主程序 参考 https://github.com/ollama/ollama/blob/main/docs/api.md
 import requests
 import json
 

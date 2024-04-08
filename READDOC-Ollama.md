@@ -9,10 +9,9 @@ https://github.com/ollama/ollama/blob/main/docs/api.md
 # Commands
 ## help
 /?
-## 服务启动脚本
+## 方式一 启动脚本
 bash /teamspace/studios/this_studio/ollama-start.sh
-
-## Setup & Use
+## 方式二 逐步设置 Setup & Use
 ### 1 第一步 安装、更新环境
 curl -fsSL https://ollama.com/install.sh | sh
 ### 2 启动服务
@@ -23,8 +22,6 @@ ollama run [model] | /save [name]
 ollama create [model] -f ./[ModelfilePath] | ollama create xizhao -f ./modelfiles/Modelfile_XiZhao
 ### 5 模型列表 | 更新模型(从远程) | 删除本地模型
 ollama list | ollama pull | ollama rm [model]
-### 6 测试启动 Streamlit 测试端口冲突等
-streamlit run --server.port 8501 streamlit.py
 
 
 # Tests
@@ -32,13 +29,15 @@ streamlit run --server.port 8501 streamlit.py
 1 直接使用LM进行对话 ollama run [model]
 2 使用main.py进行复杂对话
 3 使用streamlit进行web交互
-## cases
+## 启动 Streamlit
+streamlit run --server.port 8501 streamlit.py
+## Cases
 1 Hi Mario!(role play)
 2 
 3 
-## aspects 
+## Aspects 
 维度                     0 资源 1 速度 2 语言 3 逻辑 4 创意 5 特点 
-## levels
+## Levels
 1较 2很 3极 | 1无(不会) 2差 3可 4好 5佳
 ### 7b- (need 8G GPU)
 - yi (BEST Lamma 6b q4)  资源低 速度快 中文佳 逻辑好 创意无 中文突出
